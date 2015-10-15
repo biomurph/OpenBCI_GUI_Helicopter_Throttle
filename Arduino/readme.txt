@@ -1,0 +1,1 @@
+For this setup, you need an Arduino connected to a digi pot connected to the hacked throttle control of a toy helicopter.
