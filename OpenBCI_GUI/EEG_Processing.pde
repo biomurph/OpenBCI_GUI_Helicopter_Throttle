@@ -123,14 +123,16 @@ class EEG_Processing_User {
             println("EEG_Processing_User: alpha!, Chan " + (i+1) + ", peak = " + detectedPeak[i].rms_uV_perBin + " uV at "
               + detectedPeak[i].freq_Hz + " Hz with background at = " + detectedPeak[i].background_rms_uV_perBin
               + ", SNR (dB) = " + detectedPeak[i].SNR_dB + "   " + mappedValue);
-              isDetected = false;
+//              isDetected = false;
           }
         }
       }
     }
-    mappedValue += char(lastPeak);
-    println("Detected Peak on chan " + peakChan + " Mapped Value: " + mappedValue);
-    helicopter.throttle(mappedValue); // send the ASCII command to the hacked helicopter
+    if(isDetected){
+      mappedValue += char(lastPeak);
+      println("Detected Peak on chan " + peakChan + " Mapped Value: " + mappedValue);
+      helicopter.throttle(mappedValue); // send the ASCII command to the hacked helicopter
+    }
   }  // end of processMultiChannel
 
   public void processSingleChannel(float[][] data_newest_uV, //holds raw EEG data that is new since the last call
