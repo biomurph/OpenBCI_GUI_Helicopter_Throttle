@@ -1,5 +1,6 @@
 # OpenBCI_GUI_Helicopter_Throttle
 variant of OpenBCI GUI that uses strength of alpha wave to control helicopter throttle
+## This code works with Processing 2.2.1 only
 
 Take the entire OpenBCI_GUI folder and put it in your 
 
