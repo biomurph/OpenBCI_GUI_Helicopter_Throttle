@@ -2,8 +2,8 @@
 
 /*
   >>>>  OpenBCI Helicopter Throttle Control <<<<<
-  
-  MCP4351502E/ST (quad 5K) DigiPot from Microchip. 
+
+  MCP4351502E/ST (quad 5K) DigiPot from Microchip.
   http://ww1.microchip.com/downloads/en/DeviceDoc/22242A.pdf
   Helicopter is a cheapo thing from the amazon
   http://www.amazon.com/Syma-S107-S107G-Helicopter-Gyro/dp/B00F4WMAAW
@@ -11,7 +11,7 @@
   I de-soldered the throttle control potentiometer, and wired in some jumpers
   The analog pot from the toy ranges from 0 to 5K
   The digiPot ranges from 0 to 5K, so plan to use only 100% of the digiPot wiper range
-  
+
 
 */
 
@@ -47,7 +47,7 @@ void setup() {
   SPI.begin();
   SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
   Serial.println("OpenBCI Alpha Wave Helicopter Control");
-  
+
   pinMode(CS,OUTPUT); digitalWrite(CS,HIGH);
   pinMode(RST,OUTPUT); digitalWrite(RST,LOW); // digipot reset pin active low
   delay(100); digitalWrite(RST,HIGH);
@@ -58,9 +58,9 @@ void setup() {
 }
 
 void loop() {
-  
+
   if((millis() - throttleTimer > throttleDuration) && throttling){
-    throttleSetting = 0; 
+    throttleSetting = 0;
     throttleDown();
     throttling = false;
     }
@@ -69,8 +69,8 @@ void loop() {
     Serial.print("trottle: ");Serial.println(throttleSetting,DEC);
     lastThrottleSetting = throttleSetting;
   }
-    
-  
+
+
   eventSerial();
 }
 
@@ -91,7 +91,7 @@ void eventSerial(){
       expectingValue = false;
       return;  // get outa here
     }
-    
+
     Serial.print("Received "); Serial.println(inChar);
     switch (inChar) {
      case '$':  // Processing must send the $ to tell Arduino the next value is special
@@ -99,7 +99,7 @@ void eventSerial(){
        throttleUp();
        expectingValue = true;
        break;
-   
+
        default:
          break;
      }
